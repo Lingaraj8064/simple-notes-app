@@ -1,5 +1,9 @@
 const express = require('express');
-const cors = require('cors');
+app.listen(3001, () => console.log('✅ Backend running on 3001'));
+
+const cors = require("cors");
+app.use(cors()); // allow all origins
+
 const app = express();
 
 app.use(cors());
@@ -41,4 +45,4 @@ app.get("/", (req, res) => {
   res.send("Backend is running 🚀");
 });
 
-app.listen(3001, () => console.log('✅ Backend running on 3001'));
+

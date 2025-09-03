@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-const API_URL = process.env.REACT_APP_API_URL; // Environment variable
+const API_URL = process.env.REACT_APP_API_URL;
+ // Environment variable
 
 function App() {
   const [notes, setNotes] = useState([]);
