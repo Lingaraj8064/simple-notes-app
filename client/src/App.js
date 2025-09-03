@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+const API_URL = process.env.REACT_APP_API_URL; // Environment variable
+
 function App() {
   const [notes, setNotes] = useState([]);
   const [text, setText] = useState("");
@@ -7,7 +9,7 @@ function App() {
 
   // Fetch notes from backend
   useEffect(() => {
-    fetch("https://simple-notes-app-iro5.onrender.com/api/notes")
+    fetch(`${API_URL}/api/notes`)
       .then((res) => res.json())
       .then((data) => setNotes(data))
       .catch((err) => console.error("Error fetching notes:", err));
@@ -20,7 +22,7 @@ function App() {
 
     if (editId) {
       // Update note
-      fetch(`http://simple-notes-app-iro5.onrender.com/api/notes/${editId}`, {
+      fetch(`${API_URL}/api/notes/${editId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),
@@ -33,7 +35,7 @@ function App() {
         });
     } else {
       // Create new note
-      fetch("http://simple-notes-app-iro5.onrender.com/api/notes", {
+      fetch(`${API_URL}/api/notes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),
@@ -54,9 +56,7 @@ function App() {
 
   // Delete note
   const handleDelete = (id) => {
-    fetch(`http://simple-notes-app-iro5.onrender.com/api/notes/${id}`, {
-      method: "DELETE",
-    }).then(() => {
+    fetch(`${API_URL}/api/notes/${id}`, { method: "DELETE" }).then(() => {
       setNotes(notes.filter((n) => n.id !== id));
     });
   };
